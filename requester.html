@@ -1,0 +1,4685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        NIB International Bank | Data Request
+    </title>
+
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+
+                radial-gradient(
+                    circle at 70% 10%,
+                    rgba(218, 157, 31, 0.08),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #080808 0%,
+                    #12100c 50%,
+                    #080808 100%
+                );
+
+            color: white;
+
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =========================================================
+           LAYOUT
+        ========================================================= */
+
+        .dashboard {
+
+            display: flex;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+
+            width: 250px;
+
+            background:
+                rgba(15, 15, 15, 0.96);
+
+            border-right:
+                1px solid
+                rgba(218, 157, 31, 0.15);
+
+            padding:
+                28px 18px;
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            z-index: 100;
+
+        }
+
+
+        .sidebar-logo {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .sidebar-logo img {
+
+            width: 145px;
+
+            max-width: 100%;
+
+            display: block;
+
+            margin: 0 auto;
+
+        }
+
+
+        .system-title {
+
+            text-align: center;
+
+            font-size: 11px;
+
+            color: #777;
+
+            margin-top: 10px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .nav-section {
+
+            margin-top: 30px;
+
+        }
+
+
+        .nav-title {
+
+            color: #666;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin:
+                0 12px 10px;
+
+        }
+
+
+        .nav-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            width: 100%;
+
+            padding:
+                13px 14px;
+
+            margin-bottom: 5px;
+
+            border-radius: 9px;
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border 0.2s ease;
+
+            border:
+                1px solid transparent;
+
+        }
+
+
+        .nav-item:hover {
+
+            background:
+                rgba(218, 157, 31, 0.08);
+
+            color:
+                #e3a51d;
+
+        }
+
+
+        .nav-item.active {
+
+            background:
+                rgba(218, 157, 31, 0.12);
+
+            color:
+                #e3a51d;
+
+            border:
+                1px solid
+                rgba(218, 157, 31, 0.15);
+
+        }
+
+
+        .nav-icon {
+
+            width: 20px;
+
+            min-width: 20px;
+
+            text-align: center;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .main {
+
+            margin-left: 250px;
+
+            width:
+                calc(100% - 250px);
+
+            min-height: 100vh;
+
+            padding:
+                35px 40px;
+
+        }
+
+
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .page-title h1 {
+
+            font-size: 25px;
+
+            font-weight: 600;
+
+        }
+
+
+        .page-title p {
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+
+        }
+
+
+        .requester-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .requester-details {
+
+            text-align: right;
+
+        }
+
+
+        .requester-name {
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        .requester-role {
+
+            color:
+                #dba01d;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+
+        }
+
+
+        .requester-avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #b8790d,
+                    #e5a91d
+                );
+
+            color:
+                #111;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================================================
+           CONTENT SECTIONS
+        ========================================================= */
+
+        .page-section {
+
+            width: 100%;
+
+        }
+
+
+        .content-card {
+
+            width: 100%;
+
+            max-width: 900px;
+
+            background:
+                rgba(20, 20, 20, 0.88);
+
+            border:
+                1px solid #292929;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+        }
+
+
+        .card-header {
+
+            padding:
+                22px;
+
+            border-bottom:
+                1px solid #292929;
+
+        }
+
+
+        .card-header h2 {
+
+            font-size: 17px;
+
+            font-weight: 500;
+
+        }
+
+
+        .card-header p {
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-top: 6px;
+
+        }
+
+
+        /* =========================================================
+           REQUEST FORM
+        ========================================================= */
+
+        .form {
+
+            padding:
+                25px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                18px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom:
+                8px;
+
+            color:
+                #aaa;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .required {
+
+            color:
+                #dba01d;
+
+        }
+
+
+        input,
+        textarea,
+        select {
+
+            width:
+                100%;
+
+            background:
+                #111;
+
+            border:
+                1px solid #333;
+
+            border-radius:
+                8px;
+
+            color:
+                white;
+
+            padding:
+                11px 13px;
+
+            font-size:
+                12px;
+
+            outline:
+                none;
+
+            transition:
+                border 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+
+            border-color:
+                #dba01d;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(219,160,29,0.08);
+
+        }
+
+
+        input:disabled {
+
+            color:
+                #777;
+
+            background:
+                #0d0d0d;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        textarea {
+
+            min-height:
+                150px;
+
+            resize:
+                vertical;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        select {
+
+            cursor:
+                pointer;
+
+        }
+
+
+        option {
+
+            background:
+                #111;
+
+            color:
+                white;
+
+        }
+
+
+        .help-text {
+
+            color:
+                #666;
+
+            font-size:
+                10px;
+
+            margin-top:
+                6px;
+
+        }
+
+
+        /* =========================================================
+           URGENCY
+        ========================================================= */
+
+        .urgency-options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                10px;
+
+        }
+
+
+        .urgency-option {
+
+            position:
+                relative;
+
+        }
+
+
+        .urgency-option input {
+
+            position:
+                absolute;
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .urgency-option label {
+
+            display:
+                block;
+
+            text-align:
+                center;
+
+            padding:
+                11px 5px;
+
+            border:
+                1px solid #333;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            color:
+                #888;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .urgency-option label:hover {
+
+            border-color:
+                #555;
+
+            color:
+                #bbb;
+
+        }
+
+
+        .urgency-option input:checked + label {
+
+            border-color:
+                #dba01d;
+
+            background:
+                rgba(218,157,31,0.10);
+
+            color:
+                #e3a51d;
+
+        }
+
+
+        /* =========================================================
+           FORM BUTTONS
+        ========================================================= */
+
+        .form-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                flex-end;
+
+            gap:
+                12px;
+
+            padding-top:
+                8px;
+
+        }
+
+
+        .clear-button {
+
+            padding:
+                11px 20px;
+
+            border:
+                1px solid #333;
+
+            background:
+                transparent;
+
+            color:
+                #888;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .clear-button:hover {
+
+            color:
+                white;
+
+            border-color:
+                #555;
+
+        }
+
+
+        .submit-button {
+
+            padding:
+                11px 24px;
+
+            border:
+                1px solid
+                rgba(218,157,31,0.5);
+
+            background:
+                rgba(218,157,31,0.12);
+
+            color:
+                #e3a51d;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                12px;
+
+            font-weight:
+                500;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .submit-button:hover {
+
+            background:
+                rgba(218,157,31,0.22);
+
+        }
+
+
+        .submit-button:disabled {
+
+            opacity:
+                0.5;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        /* =========================================================
+           SUCCESS MESSAGE
+        ========================================================= */
+
+        .success-message {
+
+            display:
+                none;
+
+            margin-bottom:
+                20px;
+
+            padding:
+                15px 18px;
+
+            border:
+                1px solid
+                rgba(60,180,100,0.35);
+
+            background:
+                rgba(60,180,100,0.08);
+
+            border-radius:
+                9px;
+
+            color:
+                #6fd68d;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .success-message strong {
+
+            display:
+                block;
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        /* =========================================================
+           ERROR MESSAGE
+        ========================================================= */
+
+        .error-message {
+
+            display:
+                none;
+
+            margin-bottom:
+                20px;
+
+            padding:
+                15px 18px;
+
+            border:
+                1px solid
+                rgba(220,70,70,0.35);
+
+            background:
+                rgba(220,70,70,0.08);
+
+            border-radius:
+                9px;
+
+            color:
+                #ff7777;
+
+            font-size:
+                12px;
+
+        }
+
+
+        /* =========================================================
+           MY REQUESTS
+        ========================================================= */
+
+        .my-requests-section {
+
+            display:
+                none;
+
+            width:
+                100%;
+
+            max-width:
+                1150px;
+
+            background:
+                rgba(20,20,20,0.88);
+
+            border:
+                1px solid #292929;
+
+            border-radius:
+                15px;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .my-requests-header {
+
+            padding:
+                22px;
+
+            border-bottom:
+                1px solid #292929;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+        }
+
+
+        .my-requests-header h2 {
+
+            font-size:
+                17px;
+
+            font-weight:
+                500;
+
+        }
+
+
+        .my-requests-header p {
+
+            color:
+                #777;
+
+            font-size:
+                12px;
+
+            margin-top:
+                6px;
+
+        }
+
+
+        /* =========================================================
+           REFRESH BUTTON
+        ========================================================= */
+
+        .refresh-button {
+
+            padding:
+                9px 16px;
+
+            border:
+                1px solid
+                rgba(218,157,31,0.35);
+
+            background:
+                rgba(218,157,31,0.08);
+
+            color:
+                #dba01d;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                11px;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .refresh-button:hover {
+
+            background:
+                rgba(218,157,31,0.16);
+
+        }
+
+
+        /* =========================================================
+           REQUEST TABLE
+        ========================================================= */
+
+        .requests-table-container {
+
+            width:
+                100%;
+
+            overflow-x:
+                auto;
+
+        }
+
+
+        .requests-table {
+
+            width:
+                100%;
+
+            min-width:
+                950px;
+
+            border-collapse:
+                collapse;
+
+        }
+
+
+        .requests-table thead {
+
+            background:
+                rgba(255,255,255,0.015);
+
+        }
+
+
+        .requests-table th {
+
+            text-align:
+                left;
+
+            padding:
+                14px 16px;
+
+            color:
+                #777;
+
+            font-size:
+                10px;
+
+            font-weight:
+                500;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.6px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .requests-table td {
+
+            padding:
+                14px 16px;
+
+            border-top:
+                1px solid #242424;
+
+            color:
+                #ccc;
+
+            font-size:
+                12px;
+
+            vertical-align:
+                middle;
+
+        }
+
+
+        .requests-table tbody tr {
+
+            transition:
+                background 0.2s ease;
+
+        }
+
+
+        .requests-table tbody tr:hover {
+
+            background:
+                rgba(218,157,31,0.035);
+
+        }
+
+
+        .request-id {
+
+            color:
+                #dba01d;
+
+            font-weight:
+                500;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .task-column {
+
+            max-width:
+                300px;
+
+            min-width:
+                220px;
+
+            color:
+                #ddd;
+
+        }
+
+
+        .task-text {
+
+            display:
+                block;
+
+            max-width:
+                300px;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+
+        }
+
+
+        .request-department {
+
+            color:
+                #aaa;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .request-engineer {
+
+            color:
+                #aaa;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        /* =========================================================
+           STATUS
+        ========================================================= */
+
+        .request-status {
+
+            display:
+                inline-block;
+
+            padding:
+                5px 10px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                10px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .request-status.pending {
+
+            background:
+                rgba(218,157,31,0.12);
+
+            color:
+                #e3a51d;
+
+        }
+
+
+        .request-status.progress {
+
+            background:
+                rgba(70,130,180,0.12);
+
+            color:
+                #79b6e8;
+
+        }
+
+
+        .request-status.completed {
+
+            background:
+                rgba(60,180,100,0.12);
+
+            color:
+                #6fd68d;
+
+        }
+
+
+        .request-status.rejected {
+
+            background:
+                rgba(220,70,70,0.12);
+
+            color:
+                #ff7777;
+
+        }
+
+
+        /* =========================================================
+           URGENCY BADGES
+        ========================================================= */
+
+        .urgency-badge {
+
+            display:
+                inline-block;
+
+            padding:
+                4px 8px;
+
+            border-radius:
+                12px;
+
+            font-size:
+                10px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .urgency-badge.low {
+
+            color:
+                #999;
+
+            background:
+                rgba(150,150,150,0.08);
+
+        }
+
+
+        .urgency-badge.medium {
+
+            color:
+                #e3a51d;
+
+            background:
+                rgba(218,157,31,0.08);
+
+        }
+
+
+        .urgency-badge.high {
+
+            color:
+                #f2a65a;
+
+            background:
+                rgba(242,166,90,0.08);
+
+        }
+
+
+        .urgency-badge.critical {
+
+            color:
+                #ff7777;
+
+            background:
+                rgba(220,70,70,0.10);
+
+        }
+
+
+        /* =========================================================
+           VIEW BUTTON
+        ========================================================= */
+
+        .view-request-button {
+
+            padding:
+                7px 12px;
+
+            border:
+                1px solid #333;
+
+            background:
+                transparent;
+
+            color:
+                #aaa;
+
+            border-radius:
+                7px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                11px;
+
+            transition:
+                0.2s ease;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .view-request-button:hover {
+
+            color:
+                #dba01d;
+
+            border-color:
+                rgba(218,157,31,0.4);
+
+            background:
+                rgba(218,157,31,0.06);
+
+        }
+
+
+        /* =========================================================
+           EMPTY / LOADING
+        ========================================================= */
+
+        .requests-empty {
+
+            padding:
+                50px 20px !important;
+
+            text-align:
+                center;
+
+            color:
+                #666 !important;
+
+            font-size:
+                12px !important;
+
+        }
+
+
+        /* =========================================================
+           REQUEST DETAILS MODAL
+        ========================================================= */
+
+        .request-modal {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            background:
+                rgba(0,0,0,0.78);
+
+            z-index:
+                1000;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+        }
+
+
+        .request-modal-content {
+
+            width:
+                100%;
+
+            max-width:
+                650px;
+
+            max-height:
+                85vh;
+
+            overflow-y:
+                auto;
+
+            background:
+                #151515;
+
+            border:
+                1px solid #333;
+
+            border-radius:
+                14px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.5);
+
+        }
+
+
+        .request-modal-header {
+
+            padding:
+                20px 22px;
+
+            border-bottom:
+                1px solid #292929;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            background:
+                #151515;
+
+            z-index:
+                2;
+
+        }
+
+
+        .request-modal-header h2 {
+
+            font-size:
+                16px;
+
+            font-weight:
+                500;
+
+        }
+
+
+        .close-modal {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                #777;
+
+            font-size:
+                22px;
+
+            cursor:
+                pointer;
+
+            border-radius:
+                6px;
+
+        }
+
+
+        .close-modal:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,0.05);
+
+        }
+
+
+        .request-details {
+
+            padding:
+                22px;
+
+        }
+
+
+        .detail-row {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                150px 1fr;
+
+            gap:
+                15px;
+
+            padding:
+                12px 0;
+
+            border-bottom:
+                1px solid #242424;
+
+        }
+
+
+        .detail-label {
+
+            color:
+                #777;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .detail-value {
+
+            color:
+                #ddd;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .task-detail {
+
+            white-space:
+                pre-wrap;
+
+            word-break:
+                break-word;
+
+        }
+
+        /* =========================================
+   NOTIFICATIONS
+========================================= */
+
+.notification-container {
+    position: relative;
+}
+
+.notification-button {
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    border: 1px solid #292929;
+
+    background: rgba(20, 20, 20, 0.9);
+
+    color: #e3a51d;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.notification-button:hover {
+    background: rgba(218, 157, 31, 0.1);
+
+    border-color:
+        rgba(218, 157, 31, 0.4);
+}
+
+.notification-badge {
+    position: absolute;
+
+    top: -5px;
+    right: -5px;
+
+    min-width: 17px;
+    height: 17px;
+
+    padding: 0 4px;
+
+    border-radius: 20px;
+
+    background: #d62828;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.notification-panel {
+    position: absolute;
+
+    top: calc(100% + 10px);
+
+    right: 0;
+
+    width: 330px;
+
+    max-height: 400px;
+
+    overflow-y: auto;
+
+    background: #151515;
+
+    border: 1px solid #303030;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.5);
+
+    display: none;
+
+    z-index: 1000;
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-header {
+    padding: 16px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid #292929;
+
+    color: white;
+
+    position: sticky;
+
+    top: 0;
+
+    background: #151515;
+
+    z-index: 2;
+}
+
+.notification-item {
+    padding: 14px 16px;
+
+    border-bottom: 1px solid #242424;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.notification-item:hover {
+    background:
+        rgba(218, 157, 31, 0.05);
+}
+
+.notification-message {
+    font-size: 12px;
+
+    color: #ddd;
+
+    line-height: 1.5;
+}
+
+.notification-type {
+    margin-top: 6px;
+
+    font-size: 9px;
+
+    color: #e3a51d;
+
+    text-transform: uppercase;
+}
+
+.notification-unread {
+    border-left: 3px solid #e3a51d;
+}
+
+.notification-empty {
+    padding: 30px 20px;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+.request-highlight {
+    animation: requestHighlight 3s ease;
+}
+
+@keyframes requestHighlight {
+
+    0% {
+        background: rgba(218, 157, 31, 0.35);
+    }
+
+    70% {
+        background: rgba(218, 157, 31, 0.18);
+    }
+
+    100% {
+        background: transparent;
+    }
+
+}
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .main {
+
+                padding:
+                    30px 25px;
+
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .form-row {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .urgency-options {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .my-requests-header {
+
+                align-items:
+                    flex-start;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+
+                width:
+                    70px;
+
+                padding:
+                    20px 10px;
+
+            }
+
+
+            .sidebar-logo img {
+
+                width:
+                    45px;
+
+            }
+
+
+            .system-title,
+            .nav-title,
+            .nav-item span {
+
+                display:
+                    none;
+
+            }
+
+
+            .nav-item {
+
+                justify-content:
+                    center;
+
+            }
+
+
+            .main {
+
+                margin-left:
+                    70px;
+
+                width:
+                    calc(100% - 70px);
+
+                padding:
+                    25px 15px;
+
+            }
+
+
+            .topbar {
+
+                align-items:
+                    flex-start;
+
+                margin-bottom:
+                    25px;
+
+            }
+
+
+            .page-title h1 {
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .page-title p {
+
+                font-size:
+                    11px;
+
+            }
+
+
+            .requester-details {
+
+                display:
+                    none;
+
+            }
+
+
+            .content-card,
+            .my-requests-section {
+
+                border-radius:
+                    12px;
+
+            }
+
+
+            .form {
+
+                padding:
+                    18px;
+
+            }
+
+
+            .my-requests-header {
+
+                flex-direction:
+                    column;
+
+                gap:
+                    15px;
+
+            }
+
+
+            .refresh-button {
+
+                width:
+                    100%;
+
+            }
+
+
+            .detail-row {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    5px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-logo">
+
+            <img
+                src="assets/nib-logo.png"
+                alt="NIB International Bank"
+            >
+
+            <div class="system-title">
+
+                Internal Data Request<br>
+                Management System
+
+            </div>
+
+        </div>
+
+
+        <div class="nav-section">
+
+            <div class="nav-title">
+                Requester
+            </div>
+
+
+            <a
+                href="#"
+                class="nav-item active"
+                id="dashboardNav"
+                onclick="showDashboard(event)"
+            >
+
+                <span class="nav-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item"
+                id="newRequestNav"
+                onclick="showRequestForm(event)"
+            >
+
+                <span class="nav-icon">＋</span>
+
+                <span>New Request</span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item"
+                id="myRequestsNav"
+                onclick="viewMyRequests(event)"
+            >
+
+                <span class="nav-icon">▤</span>
+
+                <span>My Requests</span>
+
+            </a>
+
+        </div>
+
+
+        <div class="nav-section">
+
+            <div class="nav-title">
+                Account
+            </div>
+
+
+            <a
+                href="#"
+                class="nav-item"
+                id="logoutButton"
+            >
+
+                <span class="nav-icon">↪</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================= -->
+
+    <main class="main">
+        
+
+
+        <!-- =====================================================
+             TOP BAR
+        ===================================================== -->
+
+        <div class="topbar">
+
+
+            <div class="page-title">
+
+                <h1>
+                    Requester Dashboard
+                </h1>
+
+                <p>
+                    Submit and track your internal data requests
+                </p>
+
+            </div>
+            
+
+
+            <div class="requester-info">
+
+
+                <div class="requester-details">
+                    
+
+                    <div
+                        class="requester-name"
+                        id="requesterName"
+                    >
+                        Requester
+                    </div>
+
+                    <div class="requester-role">
+                        Data Requester
+                    </div>
+
+                </div>
+
+                
+
+
+                <div
+                    class="requester-avatar"
+                    id="requesterAvatar"
+                >
+                    R
+                </div>
+                <div class="notification-container">
+
+    <button
+        class="notification-button"
+        onclick="toggleNotifications()"
+    >
+        🔔
+
+        <span
+            class="notification-badge"
+            id="notificationBadge"
+        >
+            0
+        </span>
+    </button>
+
+    <div
+        class="notification-panel"
+        id="notificationPanel"
+    >
+
+        <div class="notification-header">
+            Notifications
+        </div>
+
+        <div
+            id="notificationList"
+            class="notification-list"
+        >
+            <div class="notification-empty">
+                No notifications
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+            </div>
+
+
+        </div>
+
+        
+
+
+        <!-- =====================================================
+             NEW REQUEST SECTION
+        ===================================================== -->
+
+        <section
+            class="page-section"
+            id="requestFormSection"
+        >
+
+
+            <div class="content-card">
+
+
+                <div class="card-header">
+
+                    <h2>
+                        Submit Data Request
+                    </h2>
+
+                    <p>
+                        Provide the information below so the Data Engineering team can process your request.
+                    </p>
+
+                </div>
+
+
+                <form
+                    class="form"
+                    id="requestForm"
+                >
+
+
+                    <!-- SUCCESS -->
+
+                    <div
+                        class="success-message"
+                        id="successMessage"
+                    >
+
+                        <strong>
+                            Request submitted successfully.
+                        </strong>
+
+                        <span id="successText"></span>
+
+                    </div>
+
+
+                    <!-- ERROR -->
+
+                    <div
+                        class="error-message"
+                        id="errorMessage"
+                    >
+
+                        <span id="errorText"></span>
+
+                    </div>
+
+
+
+                    <!-- REQUESTER INFORMATION -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Requester
+                            </label>
+
+                            <input
+                                type="text"
+                                id="requesterNameInput"
+                                disabled
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Department
+                            </label>
+
+                            <input
+                                type="text"
+                                id="departmentInput"
+                                disabled
+                                placeholder="Department"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="requesterEmail">
+
+                            Personal Email
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="requesterEmail"
+                            placeholder="Enter your personal email"
+                            required
+                        >
+
+
+                        <div class="help-text">
+
+                            This email will be used to send the completed request.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- REQUEST DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="requestedTask">
+
+                            Data Request
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <textarea
+                            id="requestedTask"
+                            placeholder="Clearly describe the data you need, including relevant dates, departments, accounts, reports, or other details..."
+                            required
+                        ></textarea>
+
+
+                        <div class="help-text">
+
+                            Please provide as much detail as possible to reduce clarification delays.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FORMAT + URGENCY -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="format">
+
+                                Required Format
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="format"
+                                required
+                            >
+
+                                <option value="">
+                                    Select format
+                                </option>
+
+                                <option value="PDF">
+                                    PDF
+                                </option>
+
+                                <option value="Excel">
+                                    Excel
+                                </option>
+
+                                <option value="CSV">
+                                    CSV
+                                </option>
+
+                                <option value="Memo">
+                                    Memo
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+
+                                Urgency
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <div class="urgency-options">
+
+
+                                <div class="urgency-option">
+
+                                    <input
+                                        type="radio"
+                                        name="urgency"
+                                        id="urgencyLow"
+                                        value="Low"
+                                    >
+
+                                    <label for="urgencyLow">
+                                        Low
+                                    </label>
+
+                                </div>
+
+
+                                <div class="urgency-option">
+
+                                    <input
+                                        type="radio"
+                                        name="urgency"
+                                        id="urgencyMedium"
+                                        value="Medium"
+                                        checked
+                                    >
+
+                                    <label for="urgencyMedium">
+                                        Medium
+                                    </label>
+
+                                </div>
+
+
+                                <div class="urgency-option">
+
+                                    <input
+                                        type="radio"
+                                        name="urgency"
+                                        id="urgencyHigh"
+                                        value="High"
+                                    >
+
+                                    <label for="urgencyHigh">
+                                        High
+                                    </label>
+
+                                </div>
+
+
+                                <div class="urgency-option">
+
+                                    <input
+                                        type="radio"
+                                        name="urgency"
+                                        id="urgencyCritical"
+                                        value="Critical"
+                                    >
+
+                                    <label for="urgencyCritical">
+                                        Critical
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                            type="button"
+                            class="clear-button"
+                            onclick="clearForm()"
+                        >
+                            Clear
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="submit-button"
+                            id="submitButton"
+                        >
+                            Submit Request
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MY REQUESTS SECTION
+        ===================================================== -->
+
+        <section
+            class="my-requests-section"
+            id="myRequestsSection"
+        >
+
+
+            <div class="my-requests-header">
+
+
+                <div>
+
+                    <h2>
+                        My Requests
+                    </h2>
+
+                    <p>
+                        Track the status of your submitted data requests.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    onclick="loadMyRequests()"
+                >
+
+                    ↻ Refresh
+
+                </button>
+
+
+            </div>
+
+
+            <div class="requests-table-container">
+
+
+                <table class="requests-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Task
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Format
+                            </th>
+
+                            <th>
+                                Urgency
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Engineer
+                            </th>
+
+                            <th>
+                                Submitted
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="myRequestsTable">
+
+                        <tr>
+
+                            <td
+                                colspan="9"
+                                class="requests-empty"
+                            >
+
+                                Click "My Requests" to load your requests.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     REQUEST DETAILS MODAL
+========================================================= -->
+
+<div
+    class="request-modal"
+    id="requestModal"
+>
+
+
+    <div class="request-modal-content">
+
+
+        <div class="request-modal-header">
+
+            <h2>
+                Request Details
+            </h2>
+
+
+            <button
+                type="button"
+                class="close-modal"
+                onclick="closeRequestModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="request-details"
+            id="requestDetails"
+        >
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+    "https://request-system-backend.onrender.com";
+
+
+
+/* =========================================================
+   USER
+========================================================= */
+
+const userData =
+    localStorage.getItem("user");
+
+
+if (!userData) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+const user =
+    JSON.parse(userData);
+
+
+
+/* =========================================================
+   ROLE CHECK
+========================================================= */
+
+if (
+    !user.role ||
+    user.role.toLowerCase() !== "requester"
+) {
+
+    alert(
+        "You are not authorized to access this page."
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+
+/* =========================================================
+   DISPLAY USER
+========================================================= */
+
+const requesterDisplayName =
+    user.full_name ||
+    user.username ||
+    "Requester";
+
+
+document.getElementById(
+    "requesterName"
+).textContent =
+    requesterDisplayName;
+
+
+document.getElementById(
+    "requesterNameInput"
+).value =
+    requesterDisplayName;
+
+
+document.getElementById(
+    "departmentInput"
+).value =
+    user.department_name ||
+    user.department ||
+    "Department";
+
+
+document.getElementById(
+    "requesterAvatar"
+).textContent =
+    requesterDisplayName
+        .charAt(0)
+        .toUpperCase();
+
+
+
+/* =========================================================
+   TOKEN
+========================================================= */
+
+const token =
+    localStorage.getItem(
+        "access_token"
+    );
+
+/* =========================================
+   NOTIFICATIONS
+========================================= */
+
+const notificationPanel =
+    document.getElementById("notificationPanel");
+
+const notificationList =
+    document.getElementById("notificationList");
+
+const notificationBadge =
+    document.getElementById("notificationBadge");
+
+
+/* =========================================
+   LOAD MY NOTIFICATIONS
+========================================= */
+
+async function loadNotifications() {
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/notifications/me`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization":
+                        `Bearer ${token}`
+                }
+            }
+        );
+
+
+        const notifications =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                notifications.detail ||
+                "Failed to load notifications."
+            );
+
+        }
+
+
+        renderNotifications(
+            notifications
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Notification error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   RENDER NOTIFICATIONS
+========================================= */
+
+function renderNotifications(
+    notifications
+) {
+
+    if (
+        !notifications ||
+        notifications.length === 0
+    ) {
+
+        notificationBadge.style.display =
+            "none";
+
+        notificationList.innerHTML = `
+            <div class="notification-empty">
+                No notifications
+            </div>
+        `;
+
+        return;
+    }
+
+
+    /* -------------------------------------
+       COUNT UNREAD
+    ------------------------------------- */
+
+    const unreadCount =
+        notifications.filter(
+            notification =>
+                !notification.is_read ||
+                notification.is_read === 0
+        ).length;
+
+
+    /* -------------------------------------
+       UPDATE BADGE
+    ------------------------------------- */
+
+    if (unreadCount > 0) {
+
+        notificationBadge.textContent =
+            unreadCount > 99
+                ? "99+"
+                : unreadCount;
+
+        notificationBadge.style.display =
+            "flex";
+
+    }
+    else {
+
+        notificationBadge.style.display =
+            "none";
+
+    }
+
+
+    /* -------------------------------------
+       DISPLAY NOTIFICATIONS
+    ------------------------------------- */
+
+    notificationList.innerHTML =
+        notifications
+            .map(notification => {
+
+                const isUnread =
+                    !notification.is_read ||
+                    notification.is_read === 0;
+
+
+                return `
+                    <div
+                        class="
+                            notification-item
+                            ${isUnread
+                                ? "notification-unread"
+                                : ""}
+                        "
+                        onclick="
+                            handleNotificationClick(
+                                ${notification.notification_id},
+                                ${notification.request_id}
+                            )
+                        "
+                    >
+
+                        <div class="notification-message">
+                            ${notification.message}
+                        </div>
+
+                        <div class="notification-type">
+                            ${notification.type}
+                        </div>
+
+                    </div>
+                `;
+
+            })
+            .join("");
+
+}
+
+
+/* =========================================
+   TOGGLE NOTIFICATIONS
+========================================= */
+
+function toggleNotifications() {
+
+    notificationPanel.classList.toggle(
+        "show"
+    );
+
+}
+
+
+/* =========================================
+   CLOSE WHEN CLICKING OUTSIDE
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const container =
+            document.querySelector(
+                ".notification-container"
+            );
+
+
+        if (
+            container &&
+            !container.contains(event.target)
+        ) {
+
+            notificationPanel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   NOTIFICATION CLICK
+========================================= */
+
+async function handleNotificationClick(
+    notificationId,
+    requestId
+) {
+
+    /* -------------------------------------
+       MARK AS READ
+    ------------------------------------- */
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/notifications/${notificationId}/read`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Authorization":
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to mark notification as read."
+            );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Notification read error:",
+            error
+        );
+
+    }
+
+
+    /* -------------------------------------
+       CLOSE NOTIFICATION PANEL
+    ------------------------------------- */
+
+    notificationPanel.classList.remove(
+        "show"
+    );
+
+
+    /* -------------------------------------
+       FIND REQUEST
+    ------------------------------------- */
+
+    await goToRequest(
+        requestId
+    );
+
+
+    /* -------------------------------------
+       REFRESH NOTIFICATIONS
+    ------------------------------------- */
+
+    loadNotifications();
+
+}
+
+
+/* =========================================
+   GO TO REQUEST
+========================================= */
+
+async function goToRequest(
+    requestId
+) {
+
+    /*
+       Make sure the latest requests
+       are loaded before searching.
+    */
+
+    await loadMyRequests();
+
+
+    /*
+       Find the row belonging to
+       this request.
+    */
+
+    const requestRow =
+        document.getElementById(
+            `request-row-${requestId}`
+        );
+
+
+    if (!requestRow) {
+
+        console.warn(
+            `Request #${requestId} was not found.`
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Scroll to the request.
+    */
+
+    requestRow.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    /*
+       Highlight it.
+    */
+
+    requestRow.classList.add(
+        "request-highlight"
+    );
+
+
+    /*
+       Remove highlight after
+       a few seconds.
+    */
+
+    setTimeout(
+        function() {
+
+            requestRow.classList.remove(
+                "request-highlight"
+            );
+
+        },
+        3000
+    );
+
+}
+
+/* =========================================================
+   STORE REQUEST DATA
+========================================================= */
+
+window.myRequestsData = [];
+
+
+
+/* =========================================================
+   NAVIGATION ACTIVE STATE
+========================================================= */
+
+function setActiveNav(activeId) {
+
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(item => {
+
+            item.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const activeItem =
+        document.getElementById(
+            activeId
+        );
+
+
+    if (activeItem) {
+
+        activeItem.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SHOW DASHBOARD
+========================================================= */
+
+function showDashboard(event) {
+
+    if (event) {
+
+        event.preventDefault();
+
+    }
+
+
+    document.getElementById(
+        "requestFormSection"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "myRequestsSection"
+    ).style.display =
+        "none";
+
+
+    setActiveNav(
+        "dashboardNav"
+    );
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =========================================================
+   SHOW NEW REQUEST FORM
+========================================================= */
+
+function showRequestForm(event) {
+
+    if (event) {
+
+        event.preventDefault();
+
+    }
+
+
+    document.getElementById(
+        "requestFormSection"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "myRequestsSection"
+    ).style.display =
+        "none";
+
+
+    setActiveNav(
+        "newRequestNav"
+    );
+
+
+    document.getElementById(
+        "requestFormSection"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+
+/* =========================================================
+   MY REQUESTS
+========================================================= */
+
+async function viewMyRequests(event) {
+
+    if (event) {
+
+        event.preventDefault();
+
+    }
+
+
+    const currentToken =
+        localStorage.getItem(
+            "access_token"
+        );
+
+
+    if (!currentToken) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       SHOW MY REQUESTS SECTION
+    ----------------------------------------- */
+
+    document.getElementById(
+        "requestFormSection"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "myRequestsSection"
+    ).style.display =
+        "block";
+
+
+    setActiveNav(
+        "myRequestsNav"
+    );
+
+
+    document.getElementById(
+        "myRequestsSection"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+
+    /* -----------------------------------------
+       LOAD DATA
+    ----------------------------------------- */
+
+    await loadMyRequests();
+
+}
+
+
+
+/* =========================================================
+   LOAD MY REQUESTS
+========================================================= */
+
+async function loadMyRequests() {
+
+    const table =
+        document.getElementById(
+            "myRequestsTable"
+        );
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="9"
+                class="requests-empty"
+            >
+
+                Loading your requests...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    const currentToken =
+        localStorage.getItem(
+            "access_token"
+        );
+
+
+    if (!currentToken) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    try {
+
+
+        /*
+         * Backend endpoint:
+         *
+         * GET
+         * /requester/requests/{requester_id}
+         *
+         */
+
+
+        const response =
+    await fetch(
+        `${API_URL}/requester/my-requests`,
+        {
+            method:
+                "GET",
+
+            headers: {
+
+                "Authorization":
+                    `Bearer ${currentToken}`,
+
+                "Content-Type":
+                    "application/json"
+
+            }
+        }
+    );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "My requests response:",
+            data
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Unable to load your requests."
+            );
+
+        }
+
+
+        window.myRequestsData =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+        renderMyRequests(
+            window.myRequestsData
+        );
+
+
+    }
+    catch (error) {
+
+
+        console.error(
+            "Load my requests error:",
+            error
+        );
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="requests-empty"
+                >
+
+                    ${escapeHtml(
+                        error.message ||
+                        "Unable to load your requests."
+                    )}
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RENDER MY REQUESTS
+========================================================= */
+
+function renderMyRequests(requests) {
+
+    const table =
+        document.getElementById(
+            "myRequestsTable"
+        );
+
+
+    if (
+        !requests ||
+        requests.length === 0
+    ) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="requests-empty"
+                >
+
+                    You have not submitted any requests yet.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        requests
+            .map(
+                request =>
+                    createRequestRow(
+                        request
+                    )
+            )
+            .join("");
+
+}
+
+
+
+/* =========================================================
+   CREATE REQUEST ROW
+========================================================= */
+
+function createRequestRow(request) {
+
+
+    const status =
+        request.status ||
+        "Pending";
+
+
+    let statusClass =
+        "pending";
+
+
+    if (
+        status.toLowerCase() ===
+        "in progress"
+    ) {
+
+        statusClass =
+            "progress";
+
+    }
+
+
+    else if (
+        status.toLowerCase() ===
+        "completed"
+    ) {
+
+        statusClass =
+            "completed";
+
+    }
+
+
+    else if (
+        status.toLowerCase() ===
+        "rejected"
+    ) {
+
+        statusClass =
+            "rejected";
+
+    }
+
+
+
+    const urgency =
+        request.urgency ||
+        "-";
+
+
+    const urgencyClass =
+        urgency
+            .toLowerCase()
+            .replace(
+                /\s+/g,
+                "-"
+            );
+
+
+
+    return `
+
+        <tr>
+
+            <td>
+
+                <span class="request-id">
+
+                    #${escapeHtml(
+                        request.request_id
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td class="task-column">
+
+                <span
+                    class="task-text"
+                    title="${escapeHtml(
+                        request.requested_task ||
+                        "-"
+                    )}"
+                >
+
+                    ${escapeHtml(
+                        request.requested_task ||
+                        "-"
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="request-department">
+
+                    ${escapeHtml(
+                        request.dept_name ||
+                        "-"
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${escapeHtml(
+                    request.format ||
+                    "-"
+                )}
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="
+                        urgency-badge
+                        ${urgencyClass}
+                    "
+                >
+
+                    ${escapeHtml(
+                        urgency
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="
+                        request-status
+                        ${statusClass}
+                    "
+                >
+
+                    ${escapeHtml(
+                        status
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="request-engineer">
+
+                    ${escapeHtml(
+                        request.engineer_name ||
+                        "Not assigned"
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${formatShortDate(
+                    request.created_at
+                )}
+
+            </td>
+
+
+            <td>
+
+                <button
+                    type="button"
+                    class="view-request-button"
+                    onclick="
+                        viewRequestDetails(
+                            ${Number(
+                                request.request_id
+                            )}
+                        )
+                    "
+                >
+
+                    View
+
+                </button>
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   VIEW REQUEST DETAILS
+========================================================= */
+
+function viewRequestDetails(
+    requestId
+) {
+
+
+    const request =
+        window.myRequestsData
+            .find(
+                item =>
+                    Number(
+                        item.request_id
+                    ) ===
+                    Number(
+                        requestId
+                    )
+            );
+
+
+    if (!request) {
+
+        alert(
+            "Request details could not be found."
+        );
+
+        return;
+
+    }
+
+
+    const details =
+        document.getElementById(
+            "requestDetails"
+        );
+
+
+    const status =
+        request.status ||
+        "Pending";
+
+
+    let statusClass =
+        "pending";
+
+
+    if (
+        status.toLowerCase() ===
+        "in progress"
+    ) {
+
+        statusClass =
+            "progress";
+
+    }
+
+    else if (
+        status.toLowerCase() ===
+        "completed"
+    ) {
+
+        statusClass =
+            "completed";
+
+    }
+
+    else if (
+        status.toLowerCase() ===
+        "rejected"
+    ) {
+
+        statusClass =
+            "rejected";
+
+    }
+
+
+    details.innerHTML = `
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Request ID
+            </div>
+
+            <div class="detail-value">
+                #${escapeHtml(
+                    request.request_id
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Department
+            </div>
+
+            <div class="detail-value">
+                ${escapeHtml(
+                    request.dept_name ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Personal Email
+            </div>
+
+            <div class="detail-value">
+                ${escapeHtml(
+                    request.requester_email ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Data Request
+            </div>
+
+            <div
+                class="
+                    detail-value
+                    task-detail
+                "
+            >
+                ${escapeHtml(
+                    request.requested_task ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Required Format
+            </div>
+
+            <div class="detail-value">
+                ${escapeHtml(
+                    request.format ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Urgency
+            </div>
+
+            <div class="detail-value">
+                ${escapeHtml(
+                    request.urgency ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Status
+            </div>
+
+            <div class="detail-value">
+
+                <span
+                    class="
+                        request-status
+                        ${statusClass}
+                    "
+                >
+
+                    ${escapeHtml(
+                        status
+                    )}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Assigned Engineer
+            </div>
+
+            <div class="detail-value">
+
+                ${escapeHtml(
+                    request.engineer_name ||
+                    "Not assigned"
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Submitted
+            </div>
+
+            <div class="detail-value">
+
+                ${formatDate(
+                    request.created_at
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Last Updated
+            </div>
+
+            <div class="detail-value">
+
+                ${formatDate(
+                    request.updated_at
+                )}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "requestModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeRequestModal() {
+
+    document.getElementById(
+        "requestModal"
+    ).style.display =
+        "none";
+
+}
+
+
+document.getElementById(
+    "requestModal"
+)
+.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            this
+        ) {
+
+            closeRequestModal();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   FORMAT SHORT DATE
+========================================================= */
+
+function formatShortDate(
+    dateValue
+) {
+
+    if (!dateValue) {
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            dateValue
+        );
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return escapeHtml(
+            String(dateValue)
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   FORMAT FULL DATE
+========================================================= */
+
+function formatDate(
+    dateValue
+) {
+
+    if (!dateValue) {
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            dateValue
+        );
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return escapeHtml(
+            String(dateValue)
+        );
+
+    }
+
+
+    return date.toLocaleString(
+        "en-US",
+        {
+            year:
+                "numeric",
+
+            month:
+                "short",
+
+            day:
+                "numeric",
+
+            hour:
+                "2-digit",
+
+            minute:
+                "2-digit"
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearForm() {
+
+    document.getElementById(
+        "requestForm"
+    ).reset();
+
+
+    document.getElementById(
+        "successMessage"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "errorMessage"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "requesterNameInput"
+    ).value =
+        requesterDisplayName;
+
+
+    document.getElementById(
+        "departmentInput"
+    ).value =
+        user.department_name ||
+        user.department ||
+        "Department";
+
+
+    document.getElementById(
+        "urgencyMedium"
+    ).checked =
+        true;
+
+}
+
+
+
+/* =========================================================
+   SUBMIT REQUEST
+========================================================= */
+
+document.getElementById(
+    "requestForm"
+)
+.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+
+        const successMessage =
+            document.getElementById(
+                "successMessage"
+            );
+
+
+        const errorMessage =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        const successText =
+            document.getElementById(
+                "successText"
+            );
+
+
+        const errorText =
+            document.getElementById(
+                "errorText"
+            );
+
+
+        successMessage.style.display =
+            "none";
+
+
+        errorMessage.style.display =
+            "none";
+
+
+        const requesterEmail =
+            document.getElementById(
+                "requesterEmail"
+            ).value.trim();
+
+
+        const requestedTask =
+            document.getElementById(
+                "requestedTask"
+            ).value.trim();
+
+
+        const format =
+            document.getElementById(
+                "format"
+            ).value;
+
+
+        const urgencyElement =
+            document.querySelector(
+                'input[name="urgency"]:checked'
+            );
+
+
+        const urgency =
+            urgencyElement
+                ? urgencyElement.value
+                : null;
+
+
+
+        /* -----------------------------------------
+           VALIDATION
+        ----------------------------------------- */
+
+        if (!requesterEmail) {
+
+            errorText.textContent =
+                "Please enter your personal email.";
+
+            errorMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        if (!requestedTask) {
+
+            errorText.textContent =
+                "Please describe the data you need.";
+
+            errorMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        if (!format) {
+
+            errorText.textContent =
+                "Please select the required format.";
+
+            errorMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        if (!urgency) {
+
+            errorText.textContent =
+                "Please select the urgency.";
+
+            errorMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        if (!user.user_id) {
+
+            errorText.textContent =
+                "User information is missing. Please log in again.";
+
+            errorMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        if (!user.dept_id) {
+
+            errorText.textContent =
+                "Department information is missing from your account.";
+
+            errorMessage.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+
+        /* -----------------------------------------
+           REQUEST BODY
+        ----------------------------------------- */
+
+        const requestData = {
+
+            requester_id:
+                Number(
+                    user.user_id
+                ),
+
+            dept_id:
+                Number(
+                    user.dept_id
+                ),
+
+            requested_task:
+                requestedTask,
+
+            requester_email:
+                requesterEmail,
+
+            format:
+                format,
+
+            urgency:
+                urgency
+
+        };
+
+
+        console.log(
+            "Submitting request:",
+            requestData
+        );
+
+
+
+        /* -----------------------------------------
+           BUTTON
+        ----------------------------------------- */
+
+        submitButton.disabled =
+            true;
+
+        submitButton.textContent =
+            "Submitting...";
+
+
+
+        try {
+
+
+            const currentToken =
+                localStorage.getItem(
+                    "access_token"
+                );
+
+
+            const response =
+                await fetch(
+                    `${API_URL}/requests`,
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                `Bearer ${currentToken}`
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                requestData
+                            )
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Create request response:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    data.error ||
+                    "Unable to submit request."
+                );
+
+            }
+
+
+
+            /* -------------------------------------
+               SUCCESS
+            ------------------------------------- */
+
+            successText.textContent =
+                `Your request ID is #${data.request_id}. The Data Engineering team has been notified.`;
+
+
+            successMessage.style.display =
+                "block";
+
+
+
+            /* -------------------------------------
+               RESET FIELDS
+            ------------------------------------- */
+
+            document.getElementById(
+                "requesterEmail"
+            ).value =
+                "";
+
+
+            document.getElementById(
+                "requestedTask"
+            ).value =
+                "";
+
+
+            document.getElementById(
+                "format"
+            ).value =
+                "";
+
+
+            document.getElementById(
+                "urgencyMedium"
+            ).checked =
+                true;
+
+
+
+            /* -------------------------------------
+               SUCCESS SCROLL
+            ------------------------------------- */
+
+            successMessage.scrollIntoView({
+                behavior:
+                    "smooth",
+
+                block:
+                    "center"
+            });
+
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(
+                "Create request error:",
+                error
+            );
+
+
+            errorText.textContent =
+                error.message ||
+                "Unable to submit request.";
+
+
+            errorMessage.style.display =
+                "block";
+
+
+            errorMessage.scrollIntoView({
+                behavior:
+                    "smooth",
+
+                block:
+                    "center"
+            });
+
+        }
+
+
+        finally {
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                "Submit Request";
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document.getElementById(
+    "logoutButton"
+)
+.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+
+        localStorage.removeItem(
+            "access_token"
+        );
+
+
+        localStorage.removeItem(
+            "user"
+        );
+
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+showDashboard();
+loadMyRequests();
+loadNotifications();
+
+setInterval(() => {
+    loadNotifications();
+}, 10000);
+
+
+</script>
+
+
+</body>
+
+</html>

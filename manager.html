@@ -1,0 +1,2538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NIB International Bank | Manager Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 70% 10%,
+                    rgba(218, 157, 31, 0.08),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808 0%,
+                    #12100c 50%,
+                    #080808 100%
+                );
+
+            color: white;
+        }
+
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            width: 250px;
+
+            background: rgba(15, 15, 15, 0.95);
+
+            border-right: 1px solid rgba(218, 157, 31, 0.15);
+
+            padding: 28px 18px;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .sidebar-logo img {
+            width: 145px;
+            height: auto;
+        }
+
+
+        .system-title {
+            text-align: center;
+
+            font-size: 11px;
+
+            color: #777;
+
+            margin-top: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        /* Navigation */
+
+        .nav-section {
+            margin-top: 30px;
+        }
+
+
+        .nav-title {
+            color: #666;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin: 0 12px 10px;
+        }
+
+
+        .nav-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            margin-bottom: 5px;
+
+            border-radius: 9px;
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-item:hover {
+            background: rgba(218, 157, 31, 0.08);
+
+            color: #e3a51d;
+        }
+
+
+        .nav-item.active {
+            background: rgba(218, 157, 31, 0.12);
+
+            color: #e3a51d;
+
+            border: 1px solid rgba(218, 157, 31, 0.15);
+        }
+
+
+        .nav-icon {
+            width: 20px;
+
+            text-align: center;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 250px;
+
+            width: calc(100% - 250px);
+
+            padding: 35px 40px;
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .page-title h1 {
+            font-size: 25px;
+
+            font-weight: 600;
+        }
+
+
+        .page-title p {
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+        }
+
+
+        .manager-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .manager-avatar {
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #b8790d,
+                #e5a91d
+            );
+
+            color: #111;
+
+            font-weight: bold;
+        }
+
+
+        .manager-details {
+            text-align: right;
+        }
+
+
+        .manager-name {
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        .manager-role {
+            color: #dba01d;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+        /* =========================
+   NOTIFICATIONS
+========================= */
+
+.notification-container {
+    position: relative;
+}
+
+
+.notification-button {
+
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    border: 1px solid #292929;
+
+    background: rgba(20, 20, 20, 0.9);
+
+    color: #e3a51d;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.notification-button:hover {
+
+    background:
+        rgba(218,157,31,0.1);
+
+    border-color:
+        rgba(218,157,31,0.4);
+}
+
+
+.notification-badge {
+
+    position: absolute;
+
+    top: -5px;
+    right: -5px;
+
+    min-width: 17px;
+    height: 17px;
+
+    padding: 0 4px;
+
+    border-radius: 20px;
+
+    background: #d62828;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.notification-panel {
+
+    position: absolute;
+
+    top: 50px;
+    right: 0;
+
+    width: 330px;
+
+    max-height: 400px;
+
+    overflow-y: auto;
+
+    background: #151515;
+
+    border: 1px solid #303030;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.5);
+
+    display: none;
+
+    z-index: 1000;
+}
+
+
+.notification-panel.show {
+    display: block;
+}
+
+
+.notification-header {
+
+    padding: 16px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid #292929;
+
+    color: white;
+}
+
+
+.notification-item {
+
+    padding: 14px 16px;
+
+    border-bottom: 1px solid #242424;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.notification-item:hover {
+
+    background:
+        rgba(218,157,31,0.05);
+}
+
+
+.notification-message {
+
+    font-size: 12px;
+
+    color: #ddd;
+
+    line-height: 1.5;
+}
+
+
+.notification-type {
+
+    margin-top: 6px;
+
+    font-size: 9px;
+
+    color: #e3a51d;
+
+    text-transform: uppercase;
+}
+
+
+.notification-unread {
+
+    border-left: 3px solid #e3a51d;
+}
+
+
+.notification-empty {
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .stat-card {
+            background: rgba(20, 20, 20, 0.85);
+
+            border: 1px solid #292929;
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .stat-card:hover {
+            border-color:
+                rgba(218, 157, 31, 0.35);
+
+            transform: translateY(-2px);
+        }
+
+
+        .stat-label {
+            color: #777;
+
+            font-size: 12px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .stat-number {
+            font-size: 28px;
+
+            font-weight: 600;
+
+            color: #e3a51d;
+        }
+
+
+        /* =========================
+           CONTENT CARD
+        ========================= */
+
+        .content-card {
+            background: rgba(20, 20, 20, 0.88);
+
+            border: 1px solid #292929;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            margin-bottom: 25px;
+        }
+
+
+        .card-header {
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #292929;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .card-header h2 {
+            font-size: 16px;
+
+            font-weight: 500;
+        }
+
+
+        .card-header span {
+            color: #777;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+            text-align: left;
+
+            padding: 14px 20px;
+
+            color: #777;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            background: rgba(255,255,255,0.015);
+        }
+
+
+        td {
+            padding: 16px 20px;
+
+            border-top: 1px solid #242424;
+
+            font-size: 12px;
+
+            color: #ccc;
+        }
+
+
+        tr:hover td {
+            background: rgba(218,157,31,0.025);
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+        }
+
+
+        .status.pending {
+            background: rgba(218,157,31,0.12);
+
+            color: #e3a51d;
+        }
+
+
+        .status.progress {
+            background: rgba(70,130,180,0.12);
+
+            color: #79b6e8;
+        }
+
+
+        .status.completed {
+            background: rgba(60,180,100,0.12);
+
+            color: #6fd68d;
+        }
+
+
+        .status.rejected {
+            background: rgba(220,70,70,0.12);
+
+            color: #ff8585;
+        }
+
+
+        /* =========================
+           URGENCY
+        ========================= */
+
+        .urgency {
+            font-size: 11px;
+        }
+
+
+        .urgency.critical {
+            color: #ff6262;
+        }
+
+
+        .urgency.high {
+            color: #e3a51d;
+        }
+
+
+        .urgency.medium {
+            color: #aaa;
+        }
+
+
+        .urgency.low {
+            color: #777;
+        }
+
+
+        /* =========================
+           ASSIGN BUTTON
+        ========================= */
+
+        .assign-button {
+            border: 1px solid
+                rgba(218,157,31,0.4);
+
+            background:
+                rgba(218,157,31,0.08);
+
+            color: #e3a51d;
+
+            border-radius: 7px;
+
+            padding: 7px 12px;
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .assign-button:hover {
+            background:
+                rgba(218,157,31,0.18);
+        }
+
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty {
+            padding: 45px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            z-index: 100;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.75);
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .modal.active {
+            display: flex;
+        }
+
+
+        .modal-box {
+            width: 420px;
+
+            max-width: 90%;
+
+            background: #151515;
+
+            border: 1px solid
+                rgba(218,157,31,0.25);
+
+            border-radius: 15px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.7);
+        }
+
+
+        .modal-box h2 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .modal-request {
+            color: #777;
+
+            font-size: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            font-size: 12px;
+
+            color: #aaa;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-group select {
+            width: 100%;
+
+            height: 45px;
+
+            background: #0e0e0e;
+
+            border: 1px solid #333;
+
+            border-radius: 8px;
+
+            padding: 0 12px;
+
+            color: white;
+
+            outline: none;
+        }
+
+
+        .modal-buttons {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .modal-buttons button {
+            flex: 1;
+
+            height: 44px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+
+        .cancel-button {
+            background: transparent;
+
+            border: 1px solid #333;
+
+            color: #aaa;
+        }
+
+
+        .confirm-button {
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #b8790d,
+                    #e5a91d
+                );
+
+            color: #111;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+
+            .sidebar-logo img {
+                width: 45px;
+            }
+
+
+            .system-title,
+            .nav-title,
+            .nav-item span {
+                display: none;
+            }
+
+
+            .nav-item {
+                justify-content: center;
+            }
+
+
+            .main {
+                margin-left: 70px;
+
+                width: calc(100% - 70px);
+
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================
+         SIDEBAR
+    ================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="assets/nib-logo.png"
+                alt="NIB International Bank"
+            >
+
+            <div class="system-title">
+                Internal Data Request<br>
+                Management System
+            </div>
+
+        </div>
+
+
+        <div class="nav-section">
+
+            <div class="nav-title">
+                Management
+            </div>
+
+
+            <a
+                href="#"
+                class="nav-item active"
+                id="dashboardNav"
+            >
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item"
+                id="requestsNav"
+            >
+                <span class="nav-icon">▤</span>
+                <span>All Requests</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item"
+                id="pendingNav"
+            >
+                <span class="nav-icon">◷</span>
+                <span>Pending Requests</span>
+            </a>
+
+        </div>
+
+
+        <div class="nav-section">
+
+            <div class="nav-title">
+                Account
+            </div>
+
+
+            <a
+                href="#"
+                class="nav-item"
+                id="logoutButton"
+            >
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =================================
+         MAIN CONTENT
+    ================================== -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <div class="page-title">
+
+                <h1>
+                    Manager Dashboard
+                </h1>
+
+                <p>
+                    Overview of internal data requests
+                </p>
+
+            </div>
+
+
+            <div class="manager-info">
+
+    <!-- NOTIFICATIONS -->
+
+    <div class="notification-container">
+
+        <button
+            class="notification-button"
+            onclick="toggleNotifications()"
+        >
+            🔔
+
+            <span
+                class="notification-badge"
+                id="notificationBadge"
+            >
+                0
+            </span>
+        </button>
+
+
+        <div
+            class="notification-panel"
+            id="notificationPanel"
+        >
+
+            <div class="notification-header">
+                Notifications
+            </div>
+
+
+            <div
+                id="notificationList"
+                class="notification-list"
+            >
+
+                <div class="notification-empty">
+                    No notifications
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MANAGER DETAILS -->
+
+    <div class="manager-details">
+
+        <div
+            class="manager-name"
+            id="managerName"
+        >
+            Manager
+        </div>
+
+        <div class="manager-role">
+            Data Engineering Manager
+        </div>
+
+    </div>
+
+
+    <!-- AVATAR -->
+
+    <div
+        class="manager-avatar"
+        id="managerAvatar"
+    >
+        M
+    </div>
+
+</div>
+
+        </div>
+
+
+
+        <!-- =================================
+             STATISTICS
+        ================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Pending Requests
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="pendingCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    In Progress
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="progressCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Completed
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="completedCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Requests
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="totalCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             PENDING REQUESTS
+        ================================== -->
+
+        <section class="content-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Pending Requests
+                    </h2>
+
+                    <span>
+                        Requests waiting for assignment
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Requester</th>
+                            <th>Personal Email</th>
+
+                            <th>Task</th>
+
+                            <th>Urgency</th>
+
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="pendingTable">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="empty"
+                            >
+                                Loading requests...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             ALL REQUESTS
+        ================================== -->
+
+        <section class="content-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Recent Requests
+                    </h2>
+
+                    <span>
+                        Latest requests submitted to Data Engineering
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Requester</th>
+
+                            <th>Personal Email</th>
+
+                            <th>Task</th>
+
+                            <th>Urgency</th>
+
+                            <th>Status</th>
+
+                            <th>Engineer</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="allRequestsTable">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="empty"
+                            >
+                                Loading requests...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =================================
+     ASSIGN MODAL
+================================== -->
+
+<div
+    class="modal"
+    id="assignModal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Assign Request
+        </h2>
+
+        <div
+            class="modal-request"
+            id="modalRequestInfo"
+        >
+            Request
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Select Engineer
+            </label>
+
+            <select id="engineerSelect">
+
+                <option value="">
+                    Select an engineer
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="cancel-button"
+                id="cancelAssign"
+            >
+                CANCEL
+            </button>
+
+
+            <button
+                class="confirm-button"
+                id="confirmAssign"
+            >
+                ASSIGN REQUEST
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   API CONFIGURATION
+========================================= */
+
+const API_URL =
+    "https://request-system-backend.onrender.com";
+
+
+
+/* =========================================
+   GET LOGGED-IN USER
+========================================= */
+
+const userData =
+    localStorage.getItem("user");
+
+
+if (!userData) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+const user =
+    JSON.parse(userData);
+
+
+
+/* =========================================
+   CHECK ROLE
+========================================= */
+
+if (
+    user.role.toLowerCase()
+    !== "manager"
+) {
+
+    alert(
+        "You are not authorized to access the manager dashboard."
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+
+/* =========================================
+   DISPLAY MANAGER
+========================================= */
+
+const managerName =
+    document.getElementById("managerName");
+
+const managerAvatar =
+    document.getElementById("managerAvatar");
+
+
+managerName.textContent =
+    user.full_name ||
+    user.username;
+
+
+managerAvatar.textContent =
+    (
+        user.full_name ||
+        user.username ||
+        "M"
+    )
+    .charAt(0)
+    .toUpperCase();
+
+
+
+/* =========================================
+   GET TOKEN
+========================================= */
+
+const token =
+    localStorage.getItem("access_token");
+
+/* =========================================
+   NOTIFICATIONS
+========================================= */
+
+async function loadNotifications() {
+
+    try {
+
+        const response =
+    await fetch(
+        `${API_URL}/notifications/me`,
+        {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+        const notifications = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                notifications.detail ||
+                "Failed to load notifications."
+            );
+
+        }
+
+        displayNotifications(notifications);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Notification error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   DISPLAY NOTIFICATIONS
+========================================= */
+
+function displayNotifications(
+    notifications
+) {
+
+    const list =
+        document.getElementById(
+            "notificationList"
+        );
+
+
+    const badge =
+        document.getElementById(
+            "notificationBadge"
+        );
+
+
+    if (!notifications.length) {
+
+        badge.style.display = "none";
+
+
+        list.innerHTML = `
+
+            <div class="notification-empty">
+                No notifications
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+     * Count unread notifications
+     */
+
+    const unreadCount =
+        notifications.filter(
+            notification =>
+                notification.is_read === 0 ||
+                notification.is_read === false
+        ).length;
+
+
+    if (unreadCount > 0) {
+
+        badge.textContent =
+            unreadCount;
+
+        badge.style.display =
+            "flex";
+
+    }
+
+    else {
+
+        badge.style.display =
+            "none";
+
+    }
+
+
+    list.innerHTML =
+        notifications.map(
+            notification => {
+
+                const unread =
+                    notification.is_read === 0 ||
+                    notification.is_read === false;
+
+
+                return `
+
+                    <div
+                        class="
+                            notification-item
+                            ${unread
+                                ? "notification-unread"
+                                : ""}
+                        "
+
+                        onclick="
+                            handleNotificationClick(
+                            ${notification.notification_id},
+                            ${notification.request_id}
+                                    )
+                        "
+                    >
+
+                        <div class="notification-message">
+
+                            ${notification.message}
+
+                        </div>
+
+
+                        <div class="notification-type">
+
+                            ${notification.type}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================
+   TOGGLE NOTIFICATIONS
+========================================= */
+
+function toggleNotifications() {
+
+    const panel =
+        document.getElementById(
+            "notificationPanel"
+        );
+
+
+    panel.classList.toggle(
+        "show"
+    );
+
+}
+
+
+/* -----------------------------------------
+   CLOSE WHEN CLICKING OUTSIDE
+----------------------------------------- */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const container =
+            document.querySelector(
+                ".notification-container"
+            );
+
+
+        if (
+            !container.contains(event.target)
+        ) {
+
+            notificationPanel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   MARK NOTIFICATION AS READ
+========================================= */
+
+async function markNotificationRead(notificationId) {
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/notifications/${notificationId}/read`,
+            {
+                method: "PUT",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Unable to mark notification as read."
+            );
+
+        }
+
+        loadNotifications();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Mark notification error:",
+            error
+        );
+
+    }
+
+}
+
+async function handleNotificationClick(
+    notificationId,
+    requestId
+) {
+
+    // Mark notification as read
+    await markNotificationRead(notificationId);
+
+    // Close notification panel
+    document.getElementById(
+        "notificationPanel"
+    ).classList.remove("show");
+
+    // Find the request row
+    const row =
+        document.getElementById(
+            `request-row-${requestId}`
+        );
+
+    if (!row) {
+
+        console.log(
+            `Request #${requestId} is not currently visible.`
+        );
+
+        return;
+    }
+
+    // Scroll to the request
+    row.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    // Highlight the request
+    row.style.transition =
+        "background 0.3s ease, box-shadow 0.3s ease";
+
+    row.style.background =
+        "rgba(218, 157, 31, 0.15)";
+
+    row.style.boxShadow =
+        "inset 3px 0 0 #e3a51d";
+
+    // Remove highlight after 3 seconds
+    setTimeout(() => {
+
+        row.style.background = "";
+        row.style.boxShadow = "";
+
+    }, 3000);
+}
+
+/* =========================================
+   LOAD PENDING REQUESTS
+========================================= */
+
+async function loadPendingRequests() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/manager/requests`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load pending requests."
+            );
+
+        }
+
+
+        const requests =
+            await response.json();
+
+
+        displayPendingRequests(
+            requests
+        );
+
+
+        document.getElementById(
+            "pendingCount"
+        ).textContent =
+            requests.length;
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById(
+            "pendingTable"
+        ).innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty"
+                >
+                    Unable to load requests.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =========================================
+   DISPLAY PENDING
+========================================= */
+
+function displayPendingRequests(
+    requests
+) {
+
+    const table =
+        document.getElementById(
+            "pendingTable"
+        );
+
+
+    if (
+        requests.length === 0
+    ) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty"
+                >
+                    No pending requests.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        requests.map(
+            request => `
+
+                <tr>
+
+                    <td>
+                        #${request.request_id}
+                    </td>
+
+                    <td>
+                        ${request.requester_name || "-"}
+                    </td>
+
+                    <td>
+                         ${request.requester_email || "-"}
+
+                    </td>
+
+                    <td>
+                        ${request.requested_task}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="urgency
+                            ${request.urgency.toLowerCase()}"
+                        >
+                            ${request.urgency}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status pending"
+                        >
+                            ${request.status}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="assign-button"
+                            onclick="openAssignModal(
+                                ${request.request_id}
+                            )"
+                        >
+                            Assign
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `
+        )
+        .join("");
+
+}
+
+
+
+/* =========================================
+   LOAD ALL REQUESTS
+========================================= */
+
+async function loadAllRequests() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/manager/all-requests`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load requests."
+            );
+
+        }
+
+
+        const requests =
+            await response.json();
+
+
+        displayAllRequests(
+            requests
+        );
+
+
+        updateStatistics(
+            requests
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById(
+            "allRequestsTable"
+        ).innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty"
+                >
+                    Unable to load requests.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =========================================
+   DISPLAY ALL REQUESTS
+========================================= */
+
+function displayAllRequests(
+    requests
+) {
+
+    const table =
+        document.getElementById(
+            "allRequestsTable"
+        );
+
+
+    if (
+        requests.length === 0
+    ) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty"
+                >
+                    No requests found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+    requests.slice(0, 10)
+    .map(
+        request => `
+
+            <tr id="request-row-${request.request_id}">
+
+                <td>
+                    #${request.request_id}
+                </td>
+
+                <td>
+                    ${request.requester_name || "-"}
+                </td>
+
+                <td>
+                ${request.requester_email || "-"}
+                </td>
+
+                <td>
+                    ${request.requested_task}
+                </td>
+
+                <td>
+
+                    <span
+                        class="urgency
+                        ${request.urgency.toLowerCase()}"
+                    >
+                        ${request.urgency}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span
+                        class="status
+                        ${getStatusClass(request.status)}"
+                    >
+                        ${request.status}
+                    </span>
+
+                </td>
+
+                <td>
+                    ${request.engineer_name || "Unassigned"}
+                </td>
+
+            </tr>
+
+        `
+    )
+    .join("");
+
+}
+
+
+
+/* =========================================
+   STATUS CLASS
+========================================= */
+
+function getStatusClass(
+    status
+) {
+
+    if (
+        status === "Pending"
+    ) {
+
+        return "pending";
+
+    }
+
+    if (
+        status === "In Progress"
+    ) {
+
+        return "progress";
+
+    }
+
+    if (
+        status === "Completed"
+    ) {
+
+        return "completed";
+
+    }
+
+    if (
+        status === "Rejected"
+    ) {
+
+        return "rejected";
+
+    }
+
+    return "pending";
+
+}
+
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+function updateStatistics(
+    requests
+) {
+
+    const pending =
+        requests.filter(
+            r => r.status === "Pending"
+        ).length;
+
+
+    const progress =
+        requests.filter(
+            r => r.status === "In Progress"
+        ).length;
+
+
+    const completed =
+        requests.filter(
+            r => r.status === "Completed"
+        ).length;
+
+
+    document.getElementById(
+        "pendingCount"
+    ).textContent = pending;
+
+
+    document.getElementById(
+        "progressCount"
+    ).textContent = progress;
+
+
+    document.getElementById(
+        "completedCount"
+    ).textContent = completed;
+
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        requests.length;
+
+}
+
+
+
+/* =========================================
+   OPEN ASSIGN MODAL
+========================================= */
+
+let selectedRequestId =
+    null;
+
+
+function openAssignModal(
+    requestId
+) {
+
+    selectedRequestId =
+        requestId;
+
+
+    document.getElementById(
+        "modalRequestInfo"
+    ).textContent =
+        `Request #${requestId}`;
+
+
+    document.getElementById(
+        "assignModal"
+    ).classList.add(
+        "active"
+    );
+
+
+    loadEngineers();
+
+}
+
+
+
+/* =========================================
+   LOAD ENGINEERS
+========================================= */
+
+async function loadEngineers() {
+
+    const select =
+        document.getElementById("engineerSelect");
+
+    try {
+
+        select.innerHTML = `
+            <option value="">
+                Loading engineers...
+            </option>
+        `;
+
+        const response = await fetch(
+            `${API_URL}/manager/engineers`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization":
+                        `Bearer ${token}`
+                }
+            }
+        );
+
+        const engineers =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                engineers.detail ||
+                "Failed to load engineers."
+            );
+
+        }
+
+        if (engineers.length === 0) {
+
+            select.innerHTML = `
+                <option value="">
+                    No engineers found
+                </option>
+            `;
+
+            return;
+        }
+
+        select.innerHTML = `
+            <option value="">
+                Select an engineer
+            </option>
+        `;
+
+        engineers.forEach(engineer => {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                engineer.user_id;
+
+            option.textContent =
+                engineer.full_name ||
+                engineer.username;
+
+            select.appendChild(option);
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Engineer loading error:",
+            error
+        );
+
+        select.innerHTML = `
+            <option value="">
+                Failed to load engineers
+            </option>
+        `;
+
+    }
+}
+
+
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
+
+document.getElementById(
+    "cancelAssign"
+)
+.addEventListener(
+    "click",
+    function() {
+
+        document.getElementById(
+            "assignModal"
+        )
+        .classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   CONFIRM ASSIGNMENT
+========================================= */
+
+document.getElementById("confirmAssign")
+.addEventListener(
+    "click",
+    async function() {
+
+        const engineerId =
+            document.getElementById(
+                "engineerSelect"
+            ).value;
+
+        if (!engineerId) {
+            alert("Please select an engineer.");
+            return;
+        }
+
+        try {
+
+            // 👇 PUT THE NEW CODE HERE
+
+            console.log("Assignment payload:", {
+                request_id: Number(selectedRequestId),
+                assigned_by: Number(user.user_id),
+                assigned_to: Number(engineerId),
+                assignment_type: "Manual",
+                notes: ""
+            });
+
+            const response = await fetch(
+                `${API_URL}/manager/assign`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+                        request_id: Number(selectedRequestId),
+                        assigned_by: Number(user.user_id),
+                        assigned_to: Number(engineerId),
+                        assignment_type: "Manual",
+                        notes: ""
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            console.log("FastAPI response:", data);
+
+            if (!response.ok) {
+                throw new Error(
+                    typeof data.detail === "string"
+                        ? data.detail
+                        : JSON.stringify(data.detail, null, 2)
+                );
+            }
+
+            alert("Request assigned successfully.");
+
+            document.getElementById("assignModal")
+                .classList.remove("active");
+
+            loadPendingRequests();
+            loadAllRequests();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Assignment error:",
+                error
+            );
+
+            alert(error.message);
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+document.getElementById(
+    "logoutButton"
+)
+.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        localStorage.removeItem(
+            "access_token"
+        );
+
+        localStorage.removeItem(
+            "user"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+
+
+/* =========================================
+   LOAD DASHBOARD
+========================================= */
+
+loadPendingRequests();
+
+loadAllRequests();
+
+loadNotifications();
+
+setInterval(
+    function() {
+
+        loadPendingRequests();
+
+        loadAllRequests();
+
+        loadNotifications();
+
+    },
+    10000
+);
+
+
+</script>
+
+
+</body>
+
+</html>

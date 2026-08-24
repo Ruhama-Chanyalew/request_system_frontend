@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        NIB International Bank | All Data Requests
+    </title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 70% 10%,
+                    rgba(218, 157, 31, 0.08),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #080808 0%,
+                    #12100c 50%,
+                    #080808 100%
+                );
+
+            color: white;
+        }
+
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .page {
+
+            min-height: 100vh;
+
+            padding: 35px 40px;
+
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .page-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+
+        .back-button {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid #333;
+
+            background:
+                rgba(20,20,20,0.8);
+
+            color: #aaa;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .back-button:hover {
+
+            color: #e3a51d;
+
+            border-color:
+                rgba(218,157,31,0.4);
+
+            background:
+                rgba(218,157,31,0.08);
+
+        }
+
+
+        .page-title h1 {
+
+            font-size: 25px;
+
+            font-weight: 600;
+
+        }
+
+
+        .page-title p {
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+
+        }
+
+
+        .logo {
+
+            width: 145px;
+
+        }
+
+
+        /* =========================
+           CONTENT CARD
+        ========================= */
+
+        .content-card {
+
+            background:
+                rgba(20,20,20,0.88);
+
+            border:
+                1px solid #292929;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .card-header {
+
+            padding: 20px 22px;
+
+            border-bottom:
+                1px solid #292929;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .card-header h2 {
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+        }
+
+
+        .card-header span {
+
+            display: block;
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+
+            width: 260px;
+
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            height: 38px;
+
+            padding:
+                0 13px;
+
+            background:
+                #111;
+
+            border:
+                1px solid #333;
+
+            border-radius: 8px;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 12px;
+
+        }
+
+
+        .search-box input::placeholder {
+
+            color: #666;
+
+        }
+
+
+        .search-box input:focus {
+
+            border-color:
+                #dba01d;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(219,160,29,0.08);
+
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse:
+                collapse;
+
+        }
+
+
+        th {
+
+            text-align: left;
+
+            padding:
+                14px 20px;
+
+            color: #777;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.5px;
+
+        }
+
+
+        td {
+
+            padding:
+                16px 20px;
+
+            border-top:
+                1px solid #242424;
+
+            font-size: 12px;
+
+            color: #ccc;
+
+        }
+
+
+        tr:hover td {
+
+            background:
+                rgba(218,157,31,0.025);
+
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+
+            display: inline-block;
+
+            padding:
+                5px 9px;
+
+            border-radius:
+                20px;
+
+            font-size: 10px;
+
+        }
+
+
+        .status.pending {
+
+            background:
+                rgba(218,157,31,0.12);
+
+            color: #e3a51d;
+
+        }
+
+
+        .status.progress {
+
+            background:
+                rgba(70,130,180,0.12);
+
+            color: #79b6e8;
+
+        }
+
+
+        .status.completed {
+
+            background:
+                rgba(60,180,100,0.12);
+
+            color: #6fd68d;
+
+        }
+
+
+        .status.rejected {
+
+            background:
+                rgba(220,70,70,0.12);
+
+            color: #ff7777;
+
+        }
+
+
+        /* =========================
+           ENGINEER
+        ========================= */
+
+        .engineer {
+
+            color: #dba01d;
+
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+
+            padding: 45px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 13px;
+
+        }
+
+        /* =========================
+   VIEW MODAL
+========================= */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.75);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.modal-content {
+
+    width: 700px;
+
+    max-width: 100%;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background: #151515;
+
+    border:
+        1px solid #333;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.5);
+
+}
+
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        1px solid #292929;
+
+}
+
+
+.modal-header h2 {
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+}
+
+
+.close-button {
+
+    background: none;
+
+    border: none;
+
+    color: #777;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+}
+
+
+.close-button:hover {
+
+    color: #e3a51d;
+
+}
+
+
+.detail-row {
+
+    margin-bottom: 18px;
+
+}
+
+
+.detail-label {
+
+    color: #777;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.detail-value {
+
+    color: #ddd;
+
+    font-size: 13px;
+
+}
+
+
+.sql-box {
+
+    background: #0d0d0d;
+
+    border:
+        1px solid #292929;
+
+    border-radius: 8px;
+
+    padding: 15px;
+
+    margin-top: 5px;
+
+    overflow-x: auto;
+
+}
+
+
+.sql-box pre {
+
+    margin: 0;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    color: #e3a51d;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+}
+
+
+.view-button {
+
+    border:
+        1px solid
+        rgba(218,157,31,0.4);
+
+    background:
+        rgba(218,157,31,0.08);
+
+    color: #e3a51d;
+
+    border-radius: 7px;
+
+    padding: 7px 14px;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+}
+
+
+.view-button:hover {
+
+    background:
+        rgba(218,157,31,0.18);
+
+}
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .page {
+
+                padding:
+                    25px 20px;
+
+            }
+
+
+            .topbar {
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .card-header {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+            }
+
+
+            .search-box {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================
+         TOP BAR
+    ========================= -->
+
+    <div class="topbar">
+
+        <div class="page-title">
+
+            <button
+                class="back-button"
+                onclick="window.location.href='engineer.html'"
+            >
+                ←
+            </button>
+
+
+            <div>
+
+                <h1>
+                    All Data Requests
+                </h1>
+
+                <p>
+                    View requests handled by the Data Engineering team
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <img
+            src="assets/nib-logo.png"
+            alt="NIB International Bank"
+            class="logo"
+        >
+
+    </div>
+
+
+
+    <!-- =========================
+         REQUEST LIST
+    ========================= -->
+
+    <section class="content-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Request History
+                </h2>
+
+                <span>
+                    All requests that have been assigned to engineers
+                </span>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search requests..."
+                >
+
+            </div>
+
+        </div>
+        
+
+
+
+        <!-- =========================
+             TABLE
+        ========================= -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Requester
+                        </th>
+
+                        <th>Personal Email</th>
+
+                        <th>
+                            Task
+                        </th>
+
+                        <th>
+                            Engineer
+                        </th>
+
+                        <th>
+                            Urgency
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="requestTable">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty"
+                        >
+                            Loading requests...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- =========================
+     VIEW REQUEST MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="viewModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Request Details
+            </h2>
+
+            <button
+                class="close-button"
+                onclick="closeViewModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Requester
+            </div>
+
+            <div
+                class="detail-value"
+                id="modalRequester"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Task
+            </div>
+
+            <div
+                class="detail-value"
+                id="modalTask"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Engineer
+            </div>
+
+            <div
+                class="detail-value"
+                id="modalEngineer"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Status
+            </div>
+
+            <div
+                class="detail-value"
+                id="modalStatus"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Output Description
+            </div>
+
+            <div
+                class="detail-value"
+                id="modalOutput"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                SQL Query
+            </div>
+
+            <div class="sql-box">
+
+                <pre id="modalSQL">
+No SQL query available.
+                </pre>
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Output File
+            </div>
+
+            <div
+                class="detail-value"
+                id="modalFile"
+            >
+                -
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   API
+========================================= */
+
+const API_URL =
+    "https://request-system-backend.onrender.com";
+
+
+/* =========================================
+   USER
+========================================= */
+
+const userData =
+    localStorage.getItem("user");
+
+
+if (!userData) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+const user =
+    JSON.parse(userData);
+
+
+/* =========================================
+   ROLE CHECK
+========================================= */
+
+if (
+    user.role.toLowerCase()
+    !== "engineer"
+) {
+
+    alert(
+        "You are not authorized to access this page."
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================
+   TOKEN
+========================================= */
+
+const token =
+    localStorage.getItem(
+        "access_token"
+    );
+
+
+/* =========================================
+   STORE REQUESTS
+========================================= */
+
+let allRequests = [];
+
+
+/* =========================================
+   LOAD ALL REQUESTS
+========================================= */
+
+async function loadAllRequests() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/engineer/all-requests`,
+                {
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Failed to load requests."
+            );
+
+        }
+
+
+        allRequests = data;
+
+        displayRequests(
+            allRequests
+        );
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Load requests error:",
+            error
+        );
+
+
+        document.getElementById(
+            "requestTable"
+        ).innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty"
+                >
+                    Unable to load requests.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   DISPLAY REQUESTS
+========================================= */
+
+function displayRequests(
+    requests
+) {
+
+    const table =
+        document.getElementById(
+            "requestTable"
+        );
+
+
+    if (
+        requests.length === 0
+    ) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty"
+                >
+                    No assigned requests found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        requests.map(
+            request => {
+
+                let statusClass =
+                    "pending";
+
+
+                if (
+                    request.status ===
+                    "In Progress"
+                ) {
+
+                    statusClass =
+                        "progress";
+
+                }
+
+                else if (
+                    request.status ===
+                    "Completed"
+                ) {
+
+                    statusClass =
+                        "completed";
+
+                }
+
+                else if (
+                    request.status ===
+                    "Rejected"
+                ) {
+
+                    statusClass =
+                        "rejected";
+
+                }
+
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            #${request.request_id}
+                        </td>
+
+                        <td>
+                            ${request.requester_name || "-"}
+                        </td>
+
+                        <td>
+                        ${request.requester_email || "-"}
+                        </td>
+
+                        <td>
+                            ${request.requested_task || "-"}
+                        </td>
+
+                        <td class="engineer">
+                            ${request.engineer_name || "-"}
+                        </td>
+
+                        <td>
+                            ${request.urgency || "-"}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+                                ${request.status}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+    class="view-button"
+    onclick="viewRequest(${request.request_id})"
+>
+    View
+</button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+/* =========================================
+   VIEW REQUEST OUTPUT
+========================================= */
+
+async function viewRequest(requestId) {
+
+    const request =
+        allRequests.find(
+            r =>
+                Number(r.request_id) ===
+                Number(requestId)
+        );
+
+
+    if (!request) {
+
+        alert(
+            "Request information could not be found."
+        );
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       BASIC REQUEST INFORMATION
+    ----------------------------------------- */
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        `Request #${requestId}`;
+
+
+    document.getElementById(
+        "modalRequester"
+    ).textContent =
+        request.requester_name || "-";
+
+
+    document.getElementById(
+        "modalTask"
+    ).textContent =
+        request.requested_task || "-";
+
+
+    document.getElementById(
+        "modalEngineer"
+    ).textContent =
+        request.engineer_name || "-";
+
+
+    document.getElementById(
+        "modalStatus"
+    ).textContent =
+        request.status || "-";
+
+
+    /* -----------------------------------------
+       REQUEST OUTPUT
+    ----------------------------------------- */
+
+    document.getElementById(
+        "modalOutput"
+    ).textContent =
+        request.output_description ||
+        "No output information available.";
+
+
+    document.getElementById(
+        "modalSQL"
+    ).textContent =
+        request.sql_query ||
+        "No SQL query available.";
+
+
+    document.getElementById(
+        "modalFile"
+    ).textContent =
+        request.output_file_path ||
+        "No output file recorded.";
+
+
+    /* -----------------------------------------
+       OPEN MODAL
+    ----------------------------------------- */
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =========================================
+   CLOSE VIEW MODAL
+========================================= */
+
+function closeViewModal() {
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =========================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================= */
+
+document.getElementById(
+    "viewModal"
+)
+.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeViewModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+document.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "input",
+    function() {
+
+        const search =
+            this.value
+            .toLowerCase()
+            .trim();
+
+
+        const filtered =
+            allRequests.filter(
+                request =>
+
+                    String(
+                        request.request_id
+                    )
+                    .includes(search)
+
+                    ||
+
+                    (
+                        request.requester_name ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    (
+                        request.requested_task ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    (
+                        request.engineer_name ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+
+        displayRequests(
+            filtered
+        );
+
+    }
+);
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+loadAllRequests();
+
+
+/* =========================================
+   AUTO REFRESH
+========================================= */
+
+setInterval(
+    loadAllRequests,
+    10000
+);
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
