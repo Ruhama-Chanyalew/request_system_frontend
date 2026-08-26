@@ -1948,17 +1948,23 @@ function displayPendingRequests(
 
                     <td>
 
-                        <button
-                            class="assign-button"
-                            onclick="openAssignModal(
-                                ${request.request_id}
-                            )"
-                        >
-                            Assign
-                        </button>
+    <button
+        class="assign-button"
+        onclick="openAssignModal(
+            ${request.request_id}
+        )"
+    >
+        Assign
+    </button>
 
-                    </td>
-
+    <button
+    class="accept-button"
+    data-accept-id="${request.request_id}"
+    onclick="acceptRequest(${request.request_id})"
+>
+    Accept
+</button>
+</td>
                 </tr>
 
             `
@@ -1967,7 +1973,89 @@ function displayPendingRequests(
 
 }
 
+async function acceptRequest(requestId) {
 
+    const token =
+        localStorage.getItem("access_token");
+
+    if (!token) {
+
+        alert("You are not logged in.");
+
+        window.location.href = "index.html";
+
+        return;
+    }
+
+    // Find the exact button that was clicked
+    const button =
+        document.querySelector(
+            `[data-accept-id="${requestId}"]`
+        );
+
+    // Prevent double-clicking
+    if (button) {
+
+        if (button.disabled) {
+            return;
+        }
+
+        button.disabled = true;
+        button.textContent = "ACCEPTING...";
+    }
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/manager/accept/${requestId}`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Failed to accept request."
+            );
+        }
+
+        // Success
+        alert(
+            data.message ||
+            `Request #${requestId} has been accepted by you.`
+        );
+
+        // Refresh the pending request list
+        loadPendingRequests();
+
+    } catch (error) {
+
+        console.error(
+            "Accept request error:",
+            error
+        );
+
+        alert(error.message);
+
+        // Re-enable button if the request failed
+        if (button) {
+
+            button.disabled = false;
+            button.textContent = "Accept";
+
+        }
+    }
+}
 
 /* =========================================
    LOAD ALL REQUESTS
