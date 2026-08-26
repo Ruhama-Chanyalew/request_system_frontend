@@ -691,7 +691,58 @@
                 rgba(218,157,31,0.18);
         }
 
+/* =========================================================
+   ACCEPT BUTTON
+========================================================= */
 
+.accept-button {
+    background: #1f8f5f;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 9px 18px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+
+    margin-left: 6px;
+}
+
+.accept-button:hover {
+    background: #16734b;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(31, 143, 95, 0.25);
+}
+
+.accept-button:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+.accept-button:disabled {
+    background: #9aa0a6;
+
+    color: #ffffff;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
         /* =========================
            EMPTY STATE
         ========================= */
