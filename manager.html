@@ -997,6 +997,15 @@
                 <span>Pending Requests</span>
             </a>
 
+            <a
+    href="#"
+    class="nav-item"
+    id="reportsNav"
+>
+    <span class="nav-icon">▥</span>
+    <span>Reports</span>
+</a>
+
         </div>
 
 
@@ -1347,11 +1356,521 @@
             </div>
 
         </section>
+<!-- =================================
+     REPORTS & ANALYTICS
+================================== -->
 
+<section
+    class="reports-section"
+    id="reportsSection"
+    style="display: none;"
+>
+
+    <!-- REPORT HEADER -->
+
+    <div class="topbar" style="margin-bottom: 25px;">
+
+        <div class="page-title">
+
+            <h1>
+                Reports & Analytics
+            </h1>
+
+            <p>
+                Overview of data request activity and workload
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- REPORT OVERVIEW -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Total Requests
+            </div>
+
+            <div
+                class="stat-number"
+                id="reportTotalRequests"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Pending
+            </div>
+
+            <div
+                class="stat-number"
+                id="reportPending"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                In Progress
+            </div>
+
+            <div
+                class="stat-number"
+                id="reportInProgress"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Completed
+            </div>
+
+            <div
+                class="stat-number"
+                id="reportCompleted"
+            >
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AVERAGE REQUESTS -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Request Activity
+                </h2>
+
+                <span>
+                    Average number of requests submitted per requester
+                </span>
+
+            </div>
+
+        </div>
+
+        <div style="padding: 25px;">
+
+            <div
+                class="stat-number"
+                id="averageRequests"
+            >
+                0
+            </div>
+
+            <div
+                style="
+                    color:#777;
+                    font-size:12px;
+                    margin-top:5px;
+                "
+            >
+                Average requests per requester
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REQUESTER ACTIVITY -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Requester Activity
+                </h2>
+
+                <span>
+                    Request volume and status by requester
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Requester</th>
+                        <th>Department</th>
+                        <th>Total</th>
+                        <th>Pending</th>
+                        <th>In Progress</th>
+                        <th>Completed</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="requesterReportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            Loading report...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ENGINEER WORKLOAD -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Engineer Workload
+                </h2>
+
+                <span>
+                    Requests assigned to each engineer
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Engineer</th>
+                        <th>Assigned</th>
+                        <th>In Progress</th>
+                        <th>Completed</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="engineerReportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            class="empty"
+                        >
+                            Loading report...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- DEPARTMENT ACTIVITY -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Department Activity
+                </h2>
+
+                <span>
+                    Number of requests submitted by department
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Department</th>
+                        <th>Total Requests</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="departmentReportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="2"
+                            class="empty"
+                        >
+                            Loading report...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- URGENCY -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Request Urgency
+                </h2>
+
+                <span>
+                    Distribution of requests by urgency level
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Urgency</th>
+                        <th>Total Requests</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="urgencyReportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="2"
+                            class="empty"
+                        >
+                            Loading report...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMAT -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Request Format
+                </h2>
+
+                <span>
+                    Distribution of requested output formats
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Format</th>
+                        <th>Total Requests</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="formatReportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="2"
+                            class="empty"
+                        >
+                            Loading report...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- MONTHLY -->
+
+    <section class="content-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Monthly Request Trend
+                </h2>
+
+                <span>
+                    Number of requests submitted each month
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Month</th>
+                        <th>Total Requests</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="monthlyReportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="2"
+                            class="empty"
+                        >
+                            Loading report...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</section>
 
     </main>
 
 </div>
+
+
 
 
 
@@ -1450,6 +1969,91 @@ if (!userData) {
 
 const user =
     JSON.parse(userData);
+
+/* =========================================
+   SIDEBAR NAVIGATION
+========================================= */
+
+const dashboardNav =
+    document.getElementById("dashboardNav");
+
+const requestsNav =
+    document.getElementById("requestsNav");
+
+const pendingNav =
+    document.getElementById("pendingNav");
+
+const reportsNav =
+    document.getElementById("reportsNav");
+
+const reportsSection =
+    document.getElementById("reportsSection");
+
+
+function showDashboard() {
+
+    reportsSection.style.display = "none";
+
+    document.querySelector(".stats").style.display = "grid";
+
+    document.querySelectorAll(
+        ".content-card"
+    ).forEach(card => {
+
+        card.style.display = "block";
+
+    });
+
+    dashboardNav.classList.add("active");
+    reportsNav.classList.remove("active");
+
+}
+
+function showReports() {
+
+    reportsSection.style.display = "block";
+
+    document.querySelector(".stats").style.display = "none";
+
+    document.querySelectorAll(
+        "main > .content-card"
+    ).forEach(card => {
+
+        card.style.display = "none";
+
+    });
+
+    dashboardNav.classList.remove("active");
+    requestsNav.classList.remove("active");
+    pendingNav.classList.remove("active");
+    reportsNav.classList.add("active");
+
+    loadManagerReports();
+
+}
+
+dashboardNav.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        showDashboard();
+
+    }
+);
+
+
+reportsNav.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        showReports();
+
+    }
+);
 
 
 
@@ -2132,6 +2736,8 @@ async function loadAllRequests() {
 
     }
 
+    
+
     catch (error) {
 
         console.error(error);
@@ -2158,7 +2764,426 @@ async function loadAllRequests() {
 
 }
 
+/* =========================================
+   MANAGER REPORTS
+========================================= */
 
+async function loadManagerReports() {
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/manager/reports`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization":
+                        `Bearer ${token}`
+                }
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Failed to load manager reports."
+            );
+
+        }
+
+        displayManagerReports(data);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Manager reports error:",
+            error
+        );
+
+    }
+
+}
+
+/* =========================================
+   DISPLAY MANAGER REPORTS
+========================================= */
+
+function displayManagerReports(data) {
+
+    /* =========================
+       OVERVIEW
+    ========================= */
+
+    const overview =
+        data.overview || {};
+
+    document.getElementById(
+        "reportTotalRequests"
+    ).textContent =
+        overview.total_requests || 0;
+
+    document.getElementById(
+        "reportPending"
+    ).textContent =
+        overview.pending || 0;
+
+    document.getElementById(
+        "reportInProgress"
+    ).textContent =
+        overview.in_progress || 0;
+
+    document.getElementById(
+        "reportCompleted"
+    ).textContent =
+        overview.completed || 0;
+
+
+    /* =========================
+       AVERAGE REQUESTS
+    ========================= */
+
+    const average =
+        data.average_requests || {};
+
+    document.getElementById(
+        "averageRequests"
+    ).textContent =
+        average.average_requests_per_requester || 0;
+
+
+    /* =========================
+       REQUESTERS
+    ========================= */
+
+    const requesterTable =
+        document.getElementById(
+            "requesterReportTable"
+        );
+
+    const requesters =
+        data.requesters || [];
+
+    if (!requesters.length) {
+
+        requesterTable.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    No requester activity found.
+                </td>
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        requesterTable.innerHTML =
+            requesters.map(requester => `
+
+                <tr>
+
+                    <td>
+                        ${requester.full_name || "-"}
+                    </td>
+
+                    <td>
+                        ${requester.dept_name || "-"}
+                    </td>
+
+                    <td>
+                        ${requester.total_requests || 0}
+                    </td>
+
+                    <td>
+                        ${requester.pending || 0}
+                    </td>
+
+                    <td>
+                        ${requester.in_progress || 0}
+                    </td>
+
+                    <td>
+                        ${requester.completed || 0}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    }
+
+
+    /* =========================
+       ENGINEERS
+    ========================= */
+
+    const engineerTable =
+        document.getElementById(
+            "engineerReportTable"
+        );
+
+    const engineers =
+        data.engineers || [];
+
+    if (!engineers.length) {
+
+        engineerTable.innerHTML = `
+            <tr>
+                <td
+                    colspan="4"
+                    class="empty"
+                >
+                    No engineer workload found.
+                </td>
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        engineerTable.innerHTML =
+            engineers.map(engineer => `
+
+                <tr>
+
+                    <td>
+                        ${engineer.full_name || "-"}
+                    </td>
+
+                    <td>
+                        ${engineer.assigned || 0}
+                    </td>
+
+                    <td>
+                        ${engineer.in_progress || 0}
+                    </td>
+
+                    <td>
+                        ${engineer.completed || 0}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    }
+
+
+    /* =========================
+       DEPARTMENTS
+    ========================= */
+
+    const departmentTable =
+        document.getElementById(
+            "departmentReportTable"
+        );
+
+    const departments =
+        data.departments || [];
+
+    if (!departments.length) {
+
+        departmentTable.innerHTML = `
+            <tr>
+                <td
+                    colspan="2"
+                    class="empty"
+                >
+                    No department activity found.
+                </td>
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        departmentTable.innerHTML =
+            departments.map(department => `
+
+                <tr>
+
+                    <td>
+                        ${department.dept_name || "-"}
+                    </td>
+
+                    <td>
+                        ${department.total_requests || 0}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    }
+
+
+    /* =========================
+       URGENCY
+    ========================= */
+
+    const urgencyTable =
+        document.getElementById(
+            "urgencyReportTable"
+        );
+
+    const urgency =
+        data.urgency || [];
+
+    if (!urgency.length) {
+
+        urgencyTable.innerHTML = `
+            <tr>
+                <td
+                    colspan="2"
+                    class="empty"
+                >
+                    No urgency data found.
+                </td>
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        urgencyTable.innerHTML =
+            urgency.map(item => `
+
+                <tr>
+
+                    <td>
+
+                        <span
+                            class="urgency
+                            ${(item.urgency || "")
+                                .toLowerCase()}"
+                        >
+                            ${item.urgency || "-"}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${item.total_requests || 0}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    }
+
+
+    /* =========================
+       FORMAT
+    ========================= */
+
+    const formatTable =
+        document.getElementById(
+            "formatReportTable"
+        );
+
+    const formats =
+        data.formats || [];
+
+    if (!formats.length) {
+
+        formatTable.innerHTML = `
+            <tr>
+                <td
+                    colspan="2"
+                    class="empty"
+                >
+                    No format data found.
+                </td>
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        formatTable.innerHTML =
+            formats.map(item => `
+
+                <tr>
+
+                    <td>
+                        ${item.format || "-"}
+                    </td>
+
+                    <td>
+                        ${item.total_requests || 0}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    }
+
+
+    /* =========================
+       MONTHLY
+    ========================= */
+
+    const monthlyTable =
+        document.getElementById(
+            "monthlyReportTable"
+        );
+
+    const monthly =
+        data.monthly || [];
+
+    if (!monthly.length) {
+
+        monthlyTable.innerHTML = `
+            <tr>
+                <td
+                    colspan="2"
+                    class="empty"
+                >
+                    No monthly data found.
+                </td>
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        monthlyTable.innerHTML =
+            monthly.map(item => `
+
+                <tr>
+
+                    <td>
+                        ${item.month || "-"}
+                    </td>
+
+                    <td>
+                        ${item.total_requests || 0}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    }
+
+}
 
 /* =========================================
    DISPLAY ALL REQUESTS
@@ -2626,12 +3651,13 @@ document.getElementById(
 /* =========================================
    LOAD DASHBOARD
 ========================================= */
-
 loadPendingRequests();
 
 loadAllRequests();
 
 loadNotifications();
+
+loadManagerReports();
 
 setInterval(
     function() {
@@ -2641,6 +3667,8 @@ setInterval(
         loadAllRequests();
 
         loadNotifications();
+
+        loadManagerReports();
 
     },
     10000
